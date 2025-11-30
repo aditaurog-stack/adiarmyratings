@@ -104,5 +104,3 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPublicCatalog();
   renderAdminTable();
 });
-
-
