@@ -45,40 +45,40 @@ function getNextId() {
 
 // -------------------- PUBLIC PAGE --------------------
 
-// Handle clicks on the admin table (Delete / Edit)
-document.addEventListener("click", (event) => {
-  const button = event.target;
-
-  // We only care about admin buttons
-  if (!button.classList.contains("action-button")) return;
-
-  const action = button.dataset.action;
-  const id = Number(button.dataset.id);
-
-  // DELETE ACTION
-  if (action === "delete") {
-    const index = catalog.findIndex(item => item.id === id);
-
-    if (index !== -1) {
-      catalog.splice(index, 1); // remove from array
-      console.log("Deleted item with ID:", id);
-    }
-
-    // Re-render admin + public pages
-    renderAdminTable();
-    renderPublicCatalog();
+function renderPublicCatalog() {
+  const container = document.getElementById("catalog-list");
+  if (!container) {
+    // Not on the public page.
+    return;
   }
 
-  // EDIT will be handled later (Step 10)
-});
+  container.innerHTML = "";
 
+  catalog.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "item-card";
+
+    card.innerHTML = `
+      <img src="${item.imageUrl}" alt="${item.title}">
+      <div class="item-type">${item.type}</div>
+      <div class="item-title">${item.title}</div>
+      <div class="item-creator">By: ${item.creator}</div>
+      <div class="item-year">Year: ${item.year}</div>
+      <div class="item-description">${item.description}</div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  console.log("Public catalog rendered with", catalog.length, "items.");
+}
 
 // -------------------- ADMIN PAGE --------------------
 
 function renderAdminTable() {
   const tbody = document.getElementById("admin-items-body");
   if (!tbody) {
-    // If there is no admin-items-body, we are not on the admin page.
+    // Not on the admin page.
     return;
   }
 
@@ -105,11 +105,11 @@ function renderAdminTable() {
   console.log("Admin table rendered with", catalog.length, "items.");
 }
 
-// Set up the admin form to add new items
+// Set up the admin form to ADD new items
 function setupAdminForm() {
   const form = document.getElementById("item-form");
   if (!form) {
-    // We are not on the admin page
+    // Not on the admin page.
     return;
   }
 
@@ -124,7 +124,7 @@ function setupAdminForm() {
 
   // When the form is submitted, add a new item
   form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Stop the page from reloading
+    event.preventDefault(); // don't reload the page
 
     const newItem = {
       id: getNextId(),
@@ -139,14 +139,13 @@ function setupAdminForm() {
     };
 
     catalog.push(newItem);
-
     console.log("Added new item:", newItem);
 
-    // Re-render admin table (and public page if open)
+    // Re-render views
     renderAdminTable();
     renderPublicCatalog();
 
-    // Clear the form
+    // Reset form
     form.reset();
     idHiddenInput.value = "";
   });
@@ -165,4 +164,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderAdminTable();
   setupAdminForm();
 });
+
 
