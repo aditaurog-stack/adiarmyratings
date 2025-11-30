@@ -59,5 +59,37 @@ const catalog = [
   }
 ];
 
-// For now, just check that the data loads correctly:
-console.log("Catalog loaded with", catalog.length, "items.");
+// This function will show the catalog on the PUBLIC page.
+function renderPublicCatalog() {
+  const container = document.getElementById("catalog-list");
+  if (!container) {
+    // If there is no catalog-list div, we are probably on the admin page.
+    return;
+  }
+
+  // Clear anything inside, just in case
+  container.innerHTML = "";
+
+  catalog.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "item-card";
+
+    card.innerHTML = `
+      <img src="${item.imageUrl}" alt="${item.title}">
+      <div class="item-type">${item.type}</div>
+      <div class="item-title">${item.title}</div>
+      <div class="item-creator">By: ${item.creator}</div>
+      <div class="item-year">Year: ${item.year}</div>
+      <div class="item-description">${item.description}</div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  console.log("Public catalog rendered with", catalog.length, "items.");
+}
+
+// Run this when the page finishes loading
+document.addEventListener("DOMContentLoaded", () => {
+  renderPublicCatalog();
+});
