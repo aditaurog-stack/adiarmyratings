@@ -7,8 +7,7 @@ const catalog = [
     title: "Inception",
     creator: "Christopher Nolan",
     year: 2010,
-    imageUrl: imageUrl: "https://via.placeholder.com/300x180?text=Inception"
-,
+    imageUrl: "https://via.placeholder.com/300x180?text=Inception",
     description: "A mind-bending sci-fi movie about dreams within dreams.",
     averageRating: 0,
     ratingCount: 0
@@ -19,8 +18,7 @@ const catalog = [
     title: "Thriller",
     creator: "Michael Jackson",
     year: 1982,
-    imageUrl:imageUrl: "https://via.placeholder.com/300x180?text=Thriller"
-,
+    imageUrl: "https://via.placeholder.com/300x180?text=Thriller",
     description: "One of the best-selling albums of all time.",
     averageRating: 0,
     ratingCount: 0
@@ -31,20 +29,26 @@ const catalog = [
     title: "Starry Night",
     creator: "Vincent van Gogh",
     year: 1889,
-    imageUrl:imageUrl: "https://via.placeholder.com/300x180?text=Starry+Night"
-,
+    imageUrl: "https://via.placeholder.com/300x180?text=Starry+Night",
     description: "A famous painting with a swirling night sky.",
     averageRating: 0,
     ratingCount: 0
   }
 ];
 
+// Utility: get the next ID for a new item
+function getNextId() {
+  if (catalog.length === 0) return 1;
+  const maxId = Math.max(...catalog.map(item => item.id));
+  return maxId + 1;
+}
+
 // -------------------- PUBLIC PAGE --------------------
 
 function renderPublicCatalog() {
   const container = document.getElementById("catalog-list");
   if (!container) {
-    // Not on the public page.
+    // If there is no catalog-list div, we are not on the public page.
     return;
   }
 
@@ -74,7 +78,7 @@ function renderPublicCatalog() {
 function renderAdminTable() {
   const tbody = document.getElementById("admin-items-body");
   if (!tbody) {
-    // Not on the admin page.
+    // If there is no admin-items-body, we are not on the admin page.
     return;
   }
 
@@ -101,9 +105,64 @@ function renderAdminTable() {
   console.log("Admin table rendered with", catalog.length, "items.");
 }
 
+// Set up the admin form to add new items
+function setupAdminForm() {
+  const form = document.getElementById("item-form");
+  if (!form) {
+    // We are not on the admin page
+    return;
+  }
+
+  const typeInput = document.getElementById("item-type");
+  const titleInput = document.getElementById("item-title");
+  const creatorInput = document.getElementById("item-creator");
+  const yearInput = document.getElementById("item-year");
+  const imageInput = document.getElementById("item-image");
+  const descriptionInput = document.getElementById("item-description");
+  const idHiddenInput = document.getElementById("item-id");
+  const clearButton = document.getElementById("clear-form-button");
+
+  // When the form is submitted, add a new item
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Stop the page from reloading
+
+    const newItem = {
+      id: getNextId(),
+      type: typeInput.value,
+      title: titleInput.value,
+      creator: creatorInput.value,
+      year: Number(yearInput.value),
+      imageUrl: imageInput.value || "https://via.placeholder.com/300x180?text=No+Image",
+      description: descriptionInput.value || "",
+      averageRating: 0,
+      ratingCount: 0
+    };
+
+    catalog.push(newItem);
+
+    console.log("Added new item:", newItem);
+
+    // Re-render admin table (and public page if open)
+    renderAdminTable();
+    renderPublicCatalog();
+
+    // Clear the form
+    form.reset();
+    idHiddenInput.value = "";
+  });
+
+  // Clear form button
+  clearButton.addEventListener("click", () => {
+    form.reset();
+    idHiddenInput.value = "";
+  });
+}
+
 // -------------------- INITIALISE PAGES --------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   renderPublicCatalog();
   renderAdminTable();
+  setupAdminForm();
 });
+
