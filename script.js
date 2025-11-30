@@ -18,7 +18,8 @@ const catalog = [
     title: "Thriller",
     creator: "Michael Jackson",
     year: 1982,
-    imageUrl: "https://via.placeholder.com/300x180?text=Thriller",
+    imageUrl:imageUrl: "https://via.placeholder.com/300x180?text=Thriller"
+,
     description: "One of the best-selling albums of all time.",
     averageRating: 0,
     ratingCount: 0
@@ -29,7 +30,8 @@ const catalog = [
     title: "Starry Night",
     creator: "Vincent van Gogh",
     year: 1889,
-    imageUrl: "https://via.placeholder.com/300x180?text=Starry+Night",
+    imageUrl:imageUrl: "https://via.placeholder.com/300x180?text=Starry+Night"
+,
     description: "A famous painting with a swirling night sky.",
     averageRating: 0,
     ratingCount: 0
