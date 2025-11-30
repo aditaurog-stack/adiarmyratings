@@ -41,7 +41,7 @@ const catalog = [
 function renderPublicCatalog() {
   const container = document.getElementById("catalog-list");
   if (!container) {
-    // If there is no catalog-list div, we are not on the public page.
+    // Not on the public page.
     return;
   }
 
@@ -71,7 +71,7 @@ function renderPublicCatalog() {
 function renderAdminTable() {
   const tbody = document.getElementById("admin-items-body");
   if (!tbody) {
-    // If there is no admin-items-body, we are not on the admin page.
+    // Not on the admin page.
     return;
   }
 
