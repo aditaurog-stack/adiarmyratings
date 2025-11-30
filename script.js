@@ -1,14 +1,13 @@
 // Simple in-memory catalog of items.
-// Later we will add functions to edit them and to rate them.
 
 const catalog = [
   {
     id: 1,
     type: "movie",
-    title: "Cars",
-    creator: "Pixar",
-    year: 2006,
-    imageUrl: "https://share.google/images/iMrEJFzHKLyjVSx6o",
+    title: "Inception",
+    creator: "Christopher Nolan",
+    year: 2010,
+    imageUrl: "https://via.placeholder.com/300x180?text=Inception",
     description: "A mind-bending sci-fi movie about dreams within dreams.",
     averageRating: 0,
     ratingCount: 0
@@ -16,10 +15,10 @@ const catalog = [
   {
     id: 2,
     type: "music",
-    title: "The other side",
-    creator: "StephenSanchez",
-    year: 2025,
-    imageUrl: "https://share.google/images/ewQtHLy1TZQnkyZF6",
+    title: "Thriller",
+    creator: "Michael Jackson",
+    year: 1982,
+    imageUrl: "https://via.placeholder.com/300x180?text=Thriller",
     description: "One of the best-selling albums of all time.",
     averageRating: 0,
     ratingCount: 0
@@ -37,15 +36,15 @@ const catalog = [
   }
 ];
 
-// This function will show the catalog on the PUBLIC page.
+// -------------------- PUBLIC PAGE --------------------
+
 function renderPublicCatalog() {
   const container = document.getElementById("catalog-list");
   if (!container) {
-    // If there is no catalog-list div, we are probably on the admin page.
+    // If there is no catalog-list div, we are not on the public page.
     return;
   }
 
-  // Clear anything inside, just in case
   container.innerHTML = "";
 
   catalog.forEach(item => {
@@ -67,9 +66,43 @@ function renderPublicCatalog() {
   console.log("Public catalog rendered with", catalog.length, "items.");
 }
 
-// Run this when the page finishes loading
+// -------------------- ADMIN PAGE --------------------
+
+function renderAdminTable() {
+  const tbody = document.getElementById("admin-items-body");
+  if (!tbody) {
+    // If there is no admin-items-body, we are not on the admin page.
+    return;
+  }
+
+  tbody.innerHTML = "";
+
+  catalog.forEach(item => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${item.id}</td>
+      <td>${item.type}</td>
+      <td>${item.title}</td>
+      <td>${item.creator}</td>
+      <td>${item.year}</td>
+      <td>
+        <button class="action-button" data-action="edit" data-id="${item.id}">Edit</button>
+        <button class="action-button" data-action="delete" data-id="${item.id}">Delete</button>
+      </td>
+    `;
+
+    tbody.appendChild(row);
+  });
+
+  console.log("Admin table rendered with", catalog.length, "items.");
+}
+
+// -------------------- INITIALISE PAGES --------------------
+
 document.addEventListener("DOMContentLoaded", () => {
   renderPublicCatalog();
+  renderAdminTable();
 });
 
 
