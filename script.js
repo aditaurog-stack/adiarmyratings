@@ -1,9 +1,6 @@
 // Simple in-memory catalog of items.
 // Later we will add functions to show them on the page and to edit them.
 
-// Simple in-memory catalog of items.
-// Later we will add functions to edit them and to rate them.
-
 const catalog = [
   {
     id: 1,
@@ -11,7 +8,7 @@ const catalog = [
     title: "Inception",
     creator: "Christopher Nolan",
     year: 2010,
-    imageUrl: "https://via.placeholder.com/300x180?text=Inception",
+    imageUrl: "https://via.placeholder.com/150",
     description: "A mind-bending sci-fi movie about dreams within dreams.",
     averageRating: 0,
     ratingCount: 0
@@ -22,7 +19,7 @@ const catalog = [
     title: "Thriller",
     creator: "Michael Jackson",
     year: 1982,
-    imageUrl: "https://via.placeholder.com/300x180?text=Thriller",
+    imageUrl: "https://via.placeholder.com/150",
     description: "One of the best-selling albums of all time.",
     averageRating: 0,
     ratingCount: 0
@@ -33,44 +30,13 @@ const catalog = [
     title: "Starry Night",
     creator: "Vincent van Gogh",
     year: 1889,
-    imageUrl: "https://via.placeholder.com/300x180?text=Starry+Night",
+    imageUrl: "https://via.placeholder.com/150",
     description: "A famous painting with a swirling night sky.",
     averageRating: 0,
     ratingCount: 0
   }
 ];
 
-// This function will show the catalog on the PUBLIC page.
-function renderPublicCatalog() {
-  const container = document.getElementById("catalog-list");
-  if (!container) {
-    // If there is no catalog-list div, we are probably on the admin page.
-    return;
-  }
+// For now, just check that the data loads correctly:
+console.log("Catalog loaded with", catalog.length, "items.");
 
-  // Clear anything inside, just in case
-  container.innerHTML = "";
-
-  catalog.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "item-card";
-
-    card.innerHTML = `
-      <img src="${item.imageUrl}" alt="${item.title}">
-      <div class="item-type">${item.type}</div>
-      <div class="item-title">${item.title}</div>
-      <div class="item-creator">By: ${item.creator}</div>
-      <div class="item-year">Year: ${item.year}</div>
-      <div class="item-description">${item.description}</div>
-    `;
-
-    container.appendChild(card);
-  });
-
-  console.log("Public catalog rendered with", catalog.length, "items.");
-}
-
-// Run this when the page finishes loading
-document.addEventListener("DOMContentLoaded", () => {
-  renderPublicCatalog();
-});
