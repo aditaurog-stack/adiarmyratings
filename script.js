@@ -7,7 +7,8 @@ const catalog = [
     title: "Inception",
     creator: "Christopher Nolan",
     year: 2010,
-    imageUrl: "https://via.placeholder.com/300x180?text=Inception",
+    imageUrl: imageUrl: "https://via.placeholder.com/300x180?text=Inception"
+,
     description: "A mind-bending sci-fi movie about dreams within dreams.",
     averageRating: 0,
     ratingCount: 0
