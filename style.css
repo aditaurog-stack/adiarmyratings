@@ -1,81 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Admin – Media Catalog</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* General layout */
 
-  <h1>Admin – Media Catalog</h1>
-  <p>Use this page to add, edit, or remove items from the catalog.</p>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
 
-  <section class="admin-section">
-    <h2>Add / Edit Item</h2>
-    <form id="item-form">
-      <div class="form-row">
-        <label for="item-type">Type:</label>
-        <select id="item-type" required>
-          <option value="movie">Movie</option>
-          <option value="music">Music</option>
-          <option value="art">Art</option>
-        </select>
-      </div>
+h1 {
+  text-align: center;
+}
 
-      <div class="form-row">
-        <label for="item-title">Title:</label>
-        <input type="text" id="item-title" required />
-      </div>
+p {
+  line-height: 1.4;
+}
 
-      <div class="form-row">
-        <label for="item-creator">Creator (director/artist/singer):</label>
-        <input type="text" id="item-creator" required />
-      </div>
+/* Public catalog layout */
 
-      <div class="form-row">
-        <label for="item-year">Year:</label>
-        <input type="number" id="item-year" required />
-      </div>
+#catalog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
 
-      <div class="form-row">
-        <label for="item-image">Image URL:</label>
-        <input type="url" id="item-image" placeholder="https://..." />
-      </div>
+.item-card {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-      <div class="form-row">
-        <label for="item-description">Description:</label>
-        <textarea id="item-description" rows="3"></textarea>
-      </div>
+.item-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
 
-      <div class="form-row">
-        <button type="submit" id="save-item-button">Save Item</button>
-        <button type="button" id="clear-form-button">Clear Form</button>
-      </div>
+.item-type {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
 
-      <!-- Hidden field to track if we are editing an existing item -->
-      <input type="hidden" id="item-id" />
-    </form>
-  </section>
+.item-title {
+  font-size: 1.2rem;
+  margin: 4px 0;
+  font-weight: bold;
+}
 
-  <section class="admin-section">
-    <h2>Existing Items</h2>
-    <table class="items-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Type</th>
-          <th>Title</th>
-          <th>Creator</th>
-          <th>Year</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="admin-items-body">
-        <!-- Rows will be filled in with JavaScript -->
-      </tbody>
-    </table>
-  </section>
+.item-creator,
+.item-year {
+  font-size: 0.9rem;
+  color: #444;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.item-description {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* Rating stars */
+
+.rating {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  font-size: 1.3rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.rating-text {
+  font-size: 0.85rem;
+  color: #555;
+  margin-left: 6px;
+}
+
+/* Admin page sections */
+
+.admin-section {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.admin-section h2 {
+  margin-top: 0;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  padding: 6px;
+  font-size: 0.95rem;
+}
+
+.form-row button {
+  margin-right: 8px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* Admin table */
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.items-table th,
+.items-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.items-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+
+.action-button {
+  padding: 4px 8px;
+  margin-right: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
