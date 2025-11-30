@@ -36,6 +36,13 @@ const catalog = [
   }
 ];
 
+// Utility: get the next ID for a new item
+function getNextId() {
+  if (catalog.length === 0) return 1;
+  const maxId = Math.max(...catalog.map(item => item.id));
+  return maxId + 1;
+}
+
 // -------------------- PUBLIC PAGE --------------------
 
 function renderPublicCatalog() {
@@ -98,9 +105,64 @@ function renderAdminTable() {
   console.log("Admin table rendered with", catalog.length, "items.");
 }
 
+// Set up the admin form to add new items
+function setupAdminForm() {
+  const form = document.getElementById("item-form");
+  if (!form) {
+    // We are not on the admin page
+    return;
+  }
+
+  const typeInput = document.getElementById("item-type");
+  const titleInput = document.getElementById("item-title");
+  const creatorInput = document.getElementById("item-creator");
+  const yearInput = document.getElementById("item-year");
+  const imageInput = document.getElementById("item-image");
+  const descriptionInput = document.getElementById("item-description");
+  const idHiddenInput = document.getElementById("item-id");
+  const clearButton = document.getElementById("clear-form-button");
+
+  // When the form is submitted, add a new item
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Stop the page from reloading
+
+    const newItem = {
+      id: getNextId(),
+      type: typeInput.value,
+      title: titleInput.value,
+      creator: creatorInput.value,
+      year: Number(yearInput.value),
+      imageUrl: imageInput.value || "https://via.placeholder.com/300x180?text=No+Image",
+      description: descriptionInput.value || "",
+      averageRating: 0,
+      ratingCount: 0
+    };
+
+    catalog.push(newItem);
+
+    console.log("Added new item:", newItem);
+
+    // Re-render admin table (and public page if open)
+    renderAdminTable();
+    renderPublicCatalog();
+
+    // Clear the form
+    form.reset();
+    idHiddenInput.value = "";
+  });
+
+  // Clear form button
+  clearButton.addEventListener("click", () => {
+    form.reset();
+    idHiddenInput.value = "";
+  });
+}
+
 // -------------------- INITIALISE PAGES --------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   renderPublicCatalog();
   renderAdminTable();
+  setupAdminForm();
 });
+
