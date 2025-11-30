@@ -24,19 +24,9 @@ const catalog = [
     averageRating: 0,
     ratingCount: 0
   },
+,
   {
     id: 3,
-    type: "music",
-    title: "Voulez-vous",
-    creator: "abba",
-    year: 1979,
-    imageUrl: "https://share.google/images/YWNSnGuAqA6lYV7hz",
-    description: "One of the best songs of all time.",
-    averageRating: 0,
-    ratingCount: 0
-  },
-  {
-    id: 4,
     type: "Tv Sries",
     title: "Stranger Things",
     creator: "The Duffer Brothers",
@@ -45,18 +35,8 @@ const catalog = [
     description: "After Will goes missing it is up to his friends and family to find him",
     averageRating: 0,
     ratingCount: 0
-  },
-  {
-    id: 3,
-    type: "art",
-    title: "Starry Night",
-    creator: "Vincent van Gogh",
-    year: 1889,
-    imageUrl: "https://via.placeholder.com/150",
-    description: "A famous painting with a swirling night sky.",
-    averageRating: 0,
-    ratingCount: 0
   }
+      
 ];
 
 // This function will show the catalog on the PUBLIC page.
