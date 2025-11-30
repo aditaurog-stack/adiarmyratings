@@ -5,10 +5,10 @@ const catalog = [
   {
     id: 1,
     type: "movie",
-    title: "Inception",
-    creator: "Christopher Nolan",
-    year: 2010,
-    imageUrl: "https://via.placeholder.com/300x180?text=Inception",
+    title: "Cars",
+    creator: "Pixar",
+    year: 2006,
+    imageUrl: "https://share.google/images/iMrEJFzHKLyjVSx6o",
     description: "A mind-bending sci-fi movie about dreams within dreams.",
     averageRating: 0,
     ratingCount: 0
@@ -16,10 +16,10 @@ const catalog = [
   {
     id: 2,
     type: "music",
-    title: "Thriller",
-    creator: "Michael Jackson",
-    year: 1982,
-    imageUrl: "https://via.placeholder.com/300x180?text=Thriller",
+    title: "The other side",
+    creator: "StephenSanchez",
+    year: 2025,
+    imageUrl: "https://share.google/images/ewQtHLy1TZQnkyZF6",
     description: "One of the best-selling albums of all time.",
     averageRating: 0,
     ratingCount: 0
