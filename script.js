@@ -7,7 +7,7 @@ const DEFAULT_CATALOG = [
     title: "Inception",
     creator: "Christopher Nolan",
     year: 2010,
-    imageUrl: "https://via.placeholder.com/300x180?text=Inception",
+    imageUrl: "https://share.google/images/GmmxJaOClWv7tVkWO",
     description: "A mind-bending sci-fi movie about dreams within dreams.",
     averageRating: 0,
     ratingCount: 0
@@ -18,7 +18,7 @@ const DEFAULT_CATALOG = [
     title: "Thriller",
     creator: "Michael Jackson",
     year: 1982,
-    imageUrl: "https://via.placeholder.com/300x180?text=Thriller",
+    imageUrl: "https://share.google/images/nZnyWpXyQbhczhRrT",
     description: "One of the best-selling albums of all time.",
     averageRating: 0,
     ratingCount: 0
@@ -29,7 +29,7 @@ const DEFAULT_CATALOG = [
     title: "Starry Night",
     creator: "Vincent van Gogh",
     year: 1889,
-    imageUrl: "https://via.placeholder.com/300x180?text=Starry+Night",
+    imageUrl: "https://share.google/images/VTLVugq28cvNmnlx6",
     description: "A famous painting with a swirling night sky.",
     averageRating: 0,
     ratingCount: 0
